@@ -68,9 +68,9 @@ If Visual Studio Code were compromised, an attacker could inject malicious code,
 
 ## Section 4: Submission Checklist
 
-- File named exactly: System-Audit.md  
-- All sections completed  
-- Proper Markdown formatting used  
-- Committed with descriptive message  
-- Successfully pushed to GitHub
+-[x] File named exactly: System-Audit.md  
+-[x] All sections completed  
+-[x] Proper Markdown formatting used  
+-[x] Committed with descriptive message  
+-[x] Successfully pushed to GitHub
 
