@@ -1,58 +1,76 @@
+# System Audit
+
+---
+
 ## Section 1: System Inventory
 
 | Component | Specification |
-|-----------|---------------|
-| Operating System | macOS Sequoia 15.7.3 |
-| Total Installed RAM | 8 GB |
-| CPU Model & Clock Speed | Apple M1 |
+|------------|---------------|
+| Operating System | macOS Sequoia 15.7.3 (Apple Silicon ARM64) |
+| CPU | Apple M1 |
+| RAM | 8 GB |
+| Storage | 256 GB SSD |
 
-## Section 2: The Access Control Model
+---
 
-### Model Definition
-My operating system (macOS Sequoia 15.7.3) uses Discretionary Access Control (DAC) as its primary Access Control Model.
+## Section 2: Access Control Model
 
-Definition: Discretionary Access Control (DAC) is a model where the owner of a resource has full control over who can access that resource and what permissions they have.
+### Access Control Model Identification
 
-### Relationship to Permissions
-In DAC, the file owner can assign read, write, and execute permissions to users and groups, allowing granular control over who can read, modify, or execute files.
+macOS Sequoia 15.7.3 primarily implements Discretionary Access Control (DAC).
 
-### Principle of Least Privilege (PoLP) Application
-On macOS, administrators apply the principle of least privilege by giving standard users limited permissions and requiring administrator authentication for system-level changes.
+### Official Definition
 
-Concrete Example:
-In macOS, an administrator restricts a standard user account from installing applications or changing system settings, reducing the risk of malware installation.
+According to NIST SP 800-12, Discretionary Access Control (DAC) is a method of restricting access to objects based on the identity of subjects and/or groups to which they belong, where the owner of the object determines access permissions.
 
-## Section 3: Top Process Analysis & Risk
+### Principle of Least Privilege (PoLP) – Real System Example
+
+On my macOS system, my daily user account does not operate with unrestricted root privileges. When installing applications or modifying system settings, macOS prompts for administrator authentication.
+
+This enforces the Principle of Least Privilege by limiting standard user capabilities and reducing the risk of privilege escalation or unauthorized system-level modifications.
+
+---
+
+## Section 3: Process Analysis & Security Risk
 
 ### Process 1: Google Chrome
-- Process Name: Google Chrome
-- Process ID (PID): 28597
-- Resource Consumption: CPU: 13.3%
 
-Security Risk Hypothesis:
-If Google Chrome were compromised, an attacker could steal saved passwords, cookies, and browsing history, leading to credential theft and session hijacking.
+- Process Name: Google Chrome  
+- Process ID (PID): 28597  
+- Description: Web browser used for accessing online services and storing session data.
+
+Security Risk Hypothesis:  
+If Google Chrome were compromised, an attacker could perform data leakage by extracting stored cookies and session tokens, leading to session hijacking and credential theft. This could enable lateral movement across authenticated services.
+
+---
 
 ### Process 2: Microsoft Teams
-- Process Name: Microsoft Teams
-- Process ID (PID): 31152
-- Resource Consumption: CPU: 2.1%
 
-Security Risk Hypothesis:
-If Microsoft Teams were compromised, an attacker could intercept private communications, access shared files, and leak confidential organizational information.
+- Process Name: Microsoft Teams  
+- Process ID (PID): 31152  
+- Description: Communication and collaboration platform.
+
+Security Risk Hypothesis:  
+If Microsoft Teams were exploited, an attacker could exfiltrate sensitive organizational data, intercept communications, and abuse OAuth tokens for lateral movement within connected services.
+
+---
 
 ### Process 3: Visual Studio Code
-- Process Name: Code
-- Process ID (PID): 35642
-- Resource Consumption: CPU: 2.1%
 
-Security Risk Hypothesis:
-If Visual Studio Code were compromised, an attacker could inject malicious code into projects, steal source code, or gain access to sensitive credentials stored in configuration files.
+- Process Name: Code  
+- Process ID (PID): 35642  
+- Description: Source code editor used for development.
+
+Security Risk Hypothesis:  
+If Visual Studio Code were compromised, an attacker could inject malicious code, extract credentials from configuration files, or execute unauthorized code leading to privilege escalation.
+
+---
 
 ## Section 4: Submission Checklist
 
-- [x] File named correctly: System-Audit.md  
-- [x] All sections completed with accurate information  
-- [x] Proper Markdown formatting used  
-- [x] Spell-checked and proofread  
-- [x] Committed to GitHub with meaningful message  
-- [x] Repository link verified  
+- File named exactly: System-Audit.md  
+- All sections completed  
+- Proper Markdown formatting used  
+- Committed with descriptive message  
+- Successfully pushed to GitHub
+
